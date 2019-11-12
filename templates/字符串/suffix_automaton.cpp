@@ -1,4 +1,4 @@
-
+//后缀自动机
 const int CHARSET = 26;
 const int MAXN = 2e6 + 5;
 
@@ -71,7 +71,7 @@ struct SAM {
         return now;
     }
 
-    void toposort() {
+    void toposort() {//按 maxl 从小到大计数排序
         static int buf[MAXN + 1];
         memset(buf, 0, sizeof(buf));
         int maxmax = 0;
@@ -98,17 +98,28 @@ struct SAM {
     }
 
     void debug() {
+        printf("-------------------------------------\n");
         for (int i = 0; i < size; i++) {
-            printf("id:%d par:%d max:%d min:%d endpos size:%d\n", i, par[i], maxl[i], getmin(i), epsize[i]);
+            printf("id:%d par:%d max:%d min:%d\n", i, par[i], maxl[i], getmin(i));
             for (int j = 0; j < CHARSET; j++) {
-                bool ne = false;
                 if (go[i][j] != -1) {
-                    ne = true;
-                    printf("(--%c-> %d) ", j + '0', go[i][j]);
+                    printf("(--%c-> %d) \n", j + 'a', go[i][j]);
                 }
-                if (ne)
-                    printf("\n");
             }
         }
+        for (int i = 0; i < size; i++) {
+            printf("%d\n", i);
+        }
+        for (int i = 0; i < size; i++) {
+            printf("%d %d *\n", i, par[i]);
+        }
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < CHARSET; j++) {
+                if (go[i][j] != -1) {
+                    printf("%d %d %c\n", i, go[i][j], j + 'a');
+                }
+            }
+        }
+        printf("-------------------------------------\n");
     }
 } sam;
