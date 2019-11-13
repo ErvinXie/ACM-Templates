@@ -128,3 +128,9 @@ double min_cover_circle(Point p[], Point &c, int n) {//最小覆盖圆 c为圆�
     }
     return r;
 }
+
+struct Polygon{
+
+
+
+};
