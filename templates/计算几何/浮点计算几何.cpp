@@ -105,19 +105,18 @@ double min_cover_circle(Point p[], Point &c, int n) {//最小覆盖圆 c为圆�
     c = p[0];
     r = 0;
     for (int i = 1; i < n; i++) {
-        if (p[i].dis_to(c) > r + EPS)   //第一个点
-        {
-            c = p[i];
+        if (p[i].dis_to(c) > r + EPS){
+            c = p[i];//第一个点
             r = 0;
             for (int j = 0; j < i; j++) {
-                if (p[j].dis_to(c) > r + EPS)  //第二个点
-                {
+                if (p[j].dis_to(c) > r + EPS){
+                    //第二个点
                     c.x = (p[i].x + p[j].x) / 2;
                     c.y = (p[i].y + p[j].y) / 2;
                     r = p[j].dis_to(c);
                     for (int k = 0; k < j; k++) {
-                        if (p[k].dis_to(c) > r + EPS)  //第三个点
-                        {   //求外接圆圆心，三点必不共线
+                        //第三个点
+                        if (p[k].dis_to(c) > r + EPS){   //求外接圆圆心，三点必不共线
                             c = circumcenter(p[i], p[j], p[k]);
                             r = p[i].dis_to(c);
                         }

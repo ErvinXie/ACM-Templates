@@ -22,7 +22,6 @@ public:
         ans.z = l.t * r.z + l.z * r.t + l.x * r.y - l.y * r.x;
         return ans;
     }
-
 };
 
 
@@ -61,6 +60,14 @@ public:
     //叉乘
     Point3 cross(Point3 r) {
         return Point3(y * r.z - z * r.y, z * r.x - x * r.z, x * r.y - y * r.x);
+    }
+
+    Point3 rotate(Point3 axis, double theta) {
+        //!!axis must be a unit vector
+        Qua v(0, x, y, z);
+        Qua q(cos(0.5 * theta), sin(0.5 * theta) * axis.x, sin(0.5 * theta) * axis.y, sin(0.5 * theta) * axis.z);
+        v = (q * v) * q.inv();
+        return Point3(v.x, v.y, v.z);
     }
 
     Point3 unit() {
